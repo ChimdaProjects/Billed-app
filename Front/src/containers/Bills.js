@@ -52,7 +52,7 @@ export default class {
               }
             }
           })
-          console.log('length', bills.length)
+          //console.log('length number of bills', bills.length)
         return bills
       })
     }
