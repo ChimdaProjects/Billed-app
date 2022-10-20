@@ -69,7 +69,13 @@ export default ({ data: bills, loading, error }) => {
               </tr>
           </thead>
           <tbody data-testid="tbody">
-            ${rows(bills)}
+          ${rows(
+            (bills || []).sort((a, b) => {
+              const dateA = new Date(a.date);
+              const dateB = new Date(b.date);
+              return dateA > dateB ? -1 : 1;
+            })
+          )}
           </tbody>
           </table>
         </div>
