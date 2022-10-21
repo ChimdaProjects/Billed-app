@@ -2,7 +2,7 @@
  * @jest-environment jsdom
  */
 
-import {screen, waitFor} from "@testing-library/dom"
+import {fireEvent, screen, waitFor} from "@testing-library/dom"
 import BillsUI from "../views/BillsUI.js"
 import { bills } from "../fixtures/bills.js"
 import { ROUTES, ROUTES_PATH} from "../constants/routes.js";
@@ -75,11 +75,52 @@ describe("Given I am connected as an employee", () => {
 
       expect(handleClickNewBill).toHaveBeenCalled();
       expect(screen.getAllByText("Envoyer une note de frais")).toBeTruthy();
+    });
+  });
 
+  describe("When i click on eye's icon", () => {
+    test("Then, a modal should open", () => {
+      Object.defineProperty (
+        window, 
+        'localStorage',
+        {
+          value: localStorageMock
+        });
+      window.localStorage.setItem (
+        'user',
+        JSON.stringify({
+          type:"Employee"
+        })
+      );
 
+      const html = BillsUI({ data: [bills[0]] });
+      document.body.innerHTML = html;
+      
+      const onNavigate = (pathname) => {
+        document.body.innerHTML = ROUTES({ pathname });
+      };
+      const store = null;
+      const billsClass = new Bills({
+        document,
+        onNavigate,
+        store,
+        localStorage: window.localStorage
+      });
 
-    })
-  })
+      const modale = document.getElementById("modaleFile");
+
+      $.fn.modal = jest.fn(() => modale.classList.add("show"));
+      const eye = screen.getByTestId("icon-eye");
+      const handleClickIconEye = jest.fn(()=> billsClass.handleClickIconEye);
+      eye.addEventListener("click", handleClickIconEye)
+      userEvent.click(eye);
+
+      expect(handleClickIconEye).toHaveBeenCalled();
+  
+     expect(modale.classList).toContain("show")
+
+    });
+  });
 
 
 
