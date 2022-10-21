@@ -122,6 +122,30 @@ describe("Given I am connected as an employee", () => {
     });
   });
 
+  describe("When i navigate to Bill page", () => {
+    test("Then, fetches bills from mock API GET ", async () =>{
+      localStorage.setItem(
+        "user", 
+        JSON.stringify({ 
+          type: "Employee", 
+      }));
+      const root = document.createElement("div")
+      root.setAttribute("id", "root")
+      document.body.append(root)
+      router()
+      window.onNavigate(ROUTES_PATH.Bills)
+      const bills = new Bills( {
+        document,
+        onNavigate,
+        store: storeMock,
+        localStorage: window.localStorage
+      })
+      const getBills = jest.fn(bills.getBills);
+      const value = await getBills();
+      expect(getBills).toHaveBeenCalled();
+      expect(value.length).toBe(4);
+    })
+  })
 
 
 
