@@ -6,7 +6,7 @@ import { filteredBills } from '../containers/Dashboard.js'
 import ArrowIcon from '../assets/svg/arrow.js'
 
 export default ({ data, loading, error }) => {
-
+  
   if (loading) {
     return LoadingPage()
   } else if (error) {
