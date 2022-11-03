@@ -50,12 +50,12 @@ export default class NewBill {
 
       if (!(/\.(gif|jpg|jpeg|png)$/i).test(fileName)) { 
         alert('You must select an image file only');
-        $(fileSelected).removeClass("blue-border");
-        $(fileSelected).addClass('red-border');
+        //$(fileSelected).removeClass("blue-border");
+       // $(fileSelected).addClass('red-border');
 
         return extensionFileValid = false;
-    } else {
-      $(fileSelected).removeClass("red-border").addClass('blue-border');
+    //} else {
+      //$(fileSelected).removeClass("red-border").addClass('blue-border');
     }
   }
 
@@ -79,7 +79,7 @@ export default class NewBill {
       }
       this.updateBill(bill)
       this.onNavigate(ROUTES_PATH['Bills'])
-      $(fileSelected).removeClass("red-border").addClass('blue-border');
+      //$(fileSelected).removeClass("red-border").addClass('blue-border');
     } else {
      
       $(fileSelected).val(null);

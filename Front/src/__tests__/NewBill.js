@@ -64,6 +64,8 @@ describe("Given I am connected as an employee", () => {
       userEvent.upload(inputFile, file);
       expect(handleChangeFile).toHaveBeenCalled();
 
+      
+
     });
   });
 
@@ -118,6 +120,7 @@ describe("Given I am connected as an employee", () => {
       fireEvent.submit(formNewBill);
       
       expect(handleSubmit).toHaveBeenCalled();
+     
      
       //expect(screen.getAllByText("Mes notes de frais")).toBeTruthy();
     });
